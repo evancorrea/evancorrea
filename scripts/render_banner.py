@@ -1,4 +1,4 @@
-"""Render a horizontal terminal DNA helix with base-to-binary glyph morphs.
+"""Render an ouroboros-like terminal DNA loop with base-to-binary glyph morphs.
 
 Requires Pillow. No captions or programming-language snippets.
 """
@@ -9,11 +9,11 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'assets'
 OUT.mkdir(exist_ok=True)
-W, H = 1000, 260
-FONT = ImageFont.truetype('/System/Library/Fonts/Menlo.ttc', 20)
-SEQUENCE = 'ATGCGTACGATTCGAGCTACGGTACATGCTAGCTACG'
+W, H = 1000, 400
+FONT = ImageFont.truetype('/System/Library/Fonts/Menlo.ttc', 16)
+SEQUENCE = 'ATGCGTACGATTCGAGCTACGGTACATGCTAGCTACGATCGTACGATGC'
 COMPLEMENT = dict(A='T', T='A', C='G', G='C')
-STEM = 'terminal-helix-v2'
+STEM = 'terminal-ouroboros'
 
 def smooth(x):
     x = max(0, min(1, x))
@@ -21,8 +21,8 @@ def smooth(x):
 
 glyphs = {}
 for char in 'ATCG01':
-    glyph = Image.new('L', (24, 28))
-    ImageDraw.Draw(glyph).text((12, 14), char, font=FONT, fill=255, anchor='mm')
+    glyph = Image.new('L', (16, 20))
+    ImageDraw.Draw(glyph).text((8, 10), char, font=FONT, fill=255, anchor='mm')
     glyphs[char] = glyph
 
 frames = []
@@ -32,24 +32,29 @@ for frame in range(120):
     d = ImageDraw.Draw(im)
     points = []
     for j, base in enumerate(SEQUENCE):
-        x = 60 + j*880/(len(SEQUENCE)-1)
-        angle = j/(len(SEQUENCE)-1)*math.pi*5 + t*math.tau
-        y = 76*math.sin(angle)
-        z = math.cos(angle)
-        pair = [(base, H/2+y, z), (COMPLEMENT[base], H/2-y, -z)]
-        low, high = sorted((H/2+y,H/2-y))
-        for dot_y in range(int(low)+19, int(high)-15, 8):
-            d.rectangle((round(x)-1,dot_y,round(x),dot_y+3), fill=(155,155,155))
-        for strand, (letter, yy, depth) in enumerate(pair):
+        theta = j/len(SEQUENCE)*math.tau - math.pi/2 + t*math.tau
+        twist = j/len(SEQUENCE)*math.tau*4 + t*math.tau
+        offset = 35*math.sin(twist)
+        z = math.cos(twist)
+        pair = [(base, 136+offset, z), (COMPLEMENT[base], 136-offset, -z)]
+        # The two backbones close into an endless ring, with radial rungs.
+        low, high = sorted((136+offset,136-offset))
+        for radius in range(int(low)+12, int(high)-10, 6):
+            xx = round(W/2+radius*math.cos(theta))
+            yy = round(H/2+radius*math.sin(theta))
+            d.rectangle((xx,yy,xx+1,yy+1), fill=(155,155,155))
+        for strand, (letter, radius, depth) in enumerate(pair):
+            x = W/2+radius*math.cos(theta)
+            yy = H/2+radius*math.sin(theta)
             delay = .10*j/(len(SEQUENCE)-1)
             p = (t-delay) % 1
             morph = smooth((p-.18)/.09)*(1-smooth((p-.65)/.09))
             bit = str((j+strand)%2)
             mask = Image.blend(glyphs[letter],glyphs[bit],morph)
             shade = round(155+100*(depth+1)/2)
-            points.append((depth,round(x)-12,round(yy)-14,mask,shade))
+            points.append((depth,round(x)-8,round(yy)-10,mask,shade))
     for depth,x,y,mask,shade in sorted(points,key=lambda item:item[0]):
-        d.rectangle((x,y,x+23,y+27), fill='black')
+        d.rectangle((x,y,x+15,y+19), fill='black')
         im.paste((shade,shade,shade),(x,y),mask)
     frames.append(im)
 

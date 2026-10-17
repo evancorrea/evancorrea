@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/terminal-helix-v2.gif" alt="A horizontal black-and-white terminal DNA helix, with paired A/T/C/G bases morphing into zeros and ones and back." width="1000" />
+  <img src="assets/terminal-ouroboros.gif" alt="An endless circular DNA helix in black-and-white terminal style, with A/T/C/G bases morphing into zeros and ones as they circulate around the loop." width="1000" />
 </p>
 
 I build at the intersection of **AI and biology**, with a focus on **RNA regulatory biology** at Penn. I'm also exploring biosecurity, agentic systems, and how complex behavior emerges from simple rules.
