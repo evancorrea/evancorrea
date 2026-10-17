@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/ouroboros-sf.gif" alt="An endless circular DNA helix with multicolored A/T/C/G bases in San Francisco lettering, blending through shifting colors as they morph into zeros and ones." width="1000" />
+  <img src="assets/ouroboros-smooth.gif" alt="An endless circular DNA helix with multicolored A/T/C/G bases in San Francisco lettering, blending through shifting colors as they morph into zeros and ones." width="400" />
 </p>
 
 I build at the intersection of **AI and biology**, with a focus on **RNA regulatory biology** at Penn. I'm also exploring biosecurity, agentic systems, and how complex behavior emerges from simple rules.

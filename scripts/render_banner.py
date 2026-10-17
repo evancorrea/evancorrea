@@ -14,7 +14,9 @@ W, H = 1000, 400
 FONT = ImageFont.truetype('/System/Library/Fonts/SFNS.ttf', 18)
 SEQUENCE = 'ATGCGTACGATTCGAGCTACGGTACATGCTAGCTACGATCGTACGATGC'
 COMPLEMENT = dict(A='T', T='A', C='G', G='C')
-STEM = 'ouroboros-sf'
+STEM = 'ouroboros-smooth'
+FRAME_COUNT = 560
+FRAME_DURATION_MS = 30
 BASE_COLORS = {
     'A': (90, 245, 182),
     'T': (255, 116, 151),
@@ -33,9 +35,9 @@ for char in 'ATCG01':
     glyphs[char] = glyph
 
 frames = []
-for frame in range(240):
+for frame in range(FRAME_COUNT):
     # One rotation every 16.8 seconds; two base/binary cycles per rotation.
-    t = frame/240
+    t = frame/FRAME_COUNT
     im = Image.new('RGB', (W,H), 'black')
     d = ImageDraw.Draw(im)
     points = []
@@ -70,12 +72,20 @@ for frame in range(240):
     for depth,x,y,mask,color in sorted(points,key=lambda item:item[0]):
         d.rectangle((x,y,x+15,y+19), fill='black')
         im.paste(color,(x,y),mask)
-    frames.append(im)
+    # Exclude the empty side margins from every decoded frame.
+    frames.append(im.crop((300,0,700,H)))
 
 frames[0].save(OUT/f'{STEM}-poster.png')
-frames[0].save(OUT/f'{STEM}.gif',save_all=True,append_images=frames[1:],duration=70,loop=0,optimize=True,disposal=2)
-sheet = Image.new('RGB',(W,H*3))
-for k,i in enumerate((0,60,120)):
+# Share one palette across frames to avoid palette changes and color flicker.
+samples = Image.new('RGB',(100*20,100))
+for k in range(20):
+    samples.paste(frames[k*FRAME_COUNT//20].resize((100,100)),(k*100,0))
+palette = samples.quantize(colors=128)
+indexed = [im.quantize(palette=palette,dither=Image.Dither.NONE) for im in frames]
+indexed[0].save(OUT/f'{STEM}.gif',save_all=True,append_images=indexed[1:],
+                duration=FRAME_DURATION_MS,loop=0,optimize=True,disposal=1)
+sheet = Image.new('RGB',(400,H*3))
+for k,i in enumerate((0,FRAME_COUNT//4,FRAME_COUNT//2)):
     sheet.paste(frames[i],(0,k*H))
 sheet.save(OUT/'preview.png')
 print(f'Rendered {len(frames)} frames; GIF: {(OUT / f"{STEM}.gif").stat().st_size:,} bytes')
