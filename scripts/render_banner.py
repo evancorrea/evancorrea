@@ -6,12 +6,10 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'assets'
 OUT.mkdir(exist_ok=True)
-W, H = 1000, 320
+W, H = 1000, 280
 BG = '#0d1117'
 CYAN, PURPLE = (91, 225, 230), (179, 149, 255)
 FONT = '/System/Library/Fonts/Menlo.ttc'
-SANS = '/System/Library/Fonts/Supplemental/Arial.ttf'
-BOLD = '/System/Library/Fonts/Supplemental/Arial Bold.ttf'
 def font(size, path=FONT):
     return ImageFont.truetype(path, size)
 def mix(a, b, t):
@@ -33,15 +31,8 @@ for frame in range(120):
         for y in range(24,H,24):
             d.point((x,y), fill='#19212c')
     d.rounded_rectangle((1,1,W-2,H-2),radius=18,outline='#293342',width=1)
-    d.text((38,35),'EVAN CORREA / FIELD NOTES',font=font(12),fill='#8b949e')
-    d.text((35,87),'Life, written in code.',font=font(35,BOLD),fill='#f0f3f7')
-    d.text((38,143),'AI × biology',font=font(21,SANS),fill=CYAN)
-    d.text((38,180),'RNA regulation · learning systems',font=font(15,SANS),fill='#adb8c7')
-    d.text((38,204),'biosecurity · strange loops',font=font(15,SANS),fill='#adb8c7')
-    d.line((38,263,460,263),fill='#293342')
-    d.text((38,279),'SEQUENCE → COMPUTATION → SEQUENCE',font=font(11),fill='#8b949e')
-    # Right-hand field: two rotating backbones become two columns of code.
-    cx, top, step, n = 745, 54, 8.3, 25
+    # Center the animation; the banner contains no headings or captions.
+    cx, top, step, n = W/2, 40, 8.3, 25
     points = [[],[]]
     for strand in range(2):
         for j in range(n):
@@ -64,10 +55,7 @@ for frame in range(120):
     code = ['def transcribe(dna):', '    rna = dna.replace(', '        "T", "U"', '    )', '    return rna', '', 'while curious:', '    explore()']
     if morph > .01:
         for j,line in enumerate(code):
-            d.text((630,67+j*22),line,font=font(14),fill=color(CYAN if j<5 else PURPLE,morph))
-    label='DNA / DOUBLE HELIX' if morph<.5 else 'CODE / TRANSCRIPTION'
-    d.text((620,279),label,font=font(11),fill='#8b949e')
-    d.ellipse((933,281,939,287),fill=CYAN)
+            d.text((cx-115,53+j*22),line,font=font(14),fill=color(CYAN if j<5 else PURPLE,morph))
     frames.append(im)
 
 frames[0].save(OUT/'dna-code-poster.png')

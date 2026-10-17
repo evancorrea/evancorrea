@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/dna-code.gif" alt="Evan Correa — Life, written in code. A cyan and violet DNA helix unfolds into a transcription function, then reforms." width="1000" />
+  <img src="assets/dna-code.gif" alt="A cyan and violet DNA helix unfolds into a transcription function, then reforms." width="1000" />
 </p>
 
 I build at the intersection of **AI and biology**, with a focus on **RNA regulatory biology** at Penn. I'm also exploring biosecurity, agentic systems, and how complex behavior emerges from simple rules.
@@ -11,8 +11,9 @@ I build at the intersection of **AI and biology**, with a focus on **RNA regulat
 | Project | What I'm exploring |
 | :--- | :--- |
 | 🧬 **[POLYNET](https://github.com/evancorrea/POLYNET)** | Predicting polyadenylation sites from genomic sequence with deep learning. |
-| 🌀 **[StrangeLoops](https://github.com/evancorrea/StrangeLoops)** | Dynamical systems and the geometry of the Lorenz attractor. |
-| 🕸️ **[Socio](https://github.com/evancorrea/socio)** | Mapping relationships and exploring the structure of social graphs. |
+| 🔍 **[Mirage](https://github.com/evancorrea/mirage)** | Evaluating whether scientific discovery agents distinguish real signal from noise, confounding, and artifacts. |
+| 🛡️ **[Lucid](https://github.com/Aarjav0210/lucid)** | Automated biosecurity screening for biological synthesis. |
+| 🏆 **[Crucible](https://github.com/TheApexWu/crucible)** | Studying emergent deception between LLM agents. **1st place overall** at the Self Improving Agents Hack at Datadog. |
 
 ### Recurring interests
 
