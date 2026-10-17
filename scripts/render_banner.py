@@ -11,10 +11,10 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'assets'
 OUT.mkdir(exist_ok=True)
 W, H = 1000, 400
-FONT = ImageFont.truetype('/System/Library/Fonts/Menlo.ttc', 16)
+FONT = ImageFont.truetype('/System/Library/Fonts/SFNS.ttf', 18)
 SEQUENCE = 'ATGCGTACGATTCGAGCTACGGTACATGCTAGCTACGATCGTACGATGC'
 COMPLEMENT = dict(A='T', T='A', C='G', G='C')
-STEM = 'terminal-ouroboros-color'
+STEM = 'ouroboros-sf'
 BASE_COLORS = {
     'A': (90, 245, 182),
     'T': (255, 116, 151),
