@@ -1,0 +1,23 @@
+<p align="center">
+  <img src="assets/dna-code.gif" alt="Evan Correa — Life, written in code. A cyan and violet DNA helix unfolds into a transcription function, then reforms." width="1000" />
+</p>
+
+I build at the intersection of **AI and biology**, with a focus on **RNA regulatory biology** at Penn. I'm also exploring biosecurity, agentic systems, and how complex behavior emerges from simple rules.
+
+[Writing ↗](https://substack.com/@evancorrea)
+
+### Selected work
+
+| Project | What I'm exploring |
+| :--- | :--- |
+| 🧬 **[POLYNET](https://github.com/evancorrea/POLYNET)** | Predicting polyadenylation sites from genomic sequence with deep learning. |
+| 🌀 **[StrangeLoops](https://github.com/evancorrea/StrangeLoops)** | Dynamical systems and the geometry of the Lorenz attractor. |
+| 🕸️ **[Socio](https://github.com/evancorrea/socio)** | Mapping relationships and exploring the structure of social graphs. |
+
+### Recurring interests
+
+RNA regulation · machine learning · biosecurity · Escher · recursion · emergence
+
+<sub>Biological sequences. Learning systems. Strange loops.</sub>
+
+<!-- To understand recursion, see this profile. -->
