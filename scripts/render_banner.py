@@ -58,11 +58,11 @@ for frame in range(120):
             d.text((cx-115,53+j*22),line,font=font(14),fill=color(CYAN if j<5 else PURPLE,morph))
     frames.append(im)
 
-frames[0].save(OUT/'dna-code-poster.png')
-frames[0].save(OUT/'dna-code.gif',save_all=True,append_images=frames[1:],duration=70,loop=0,optimize=True,disposal=2)
+frames[0].save(OUT/'dna-animation-poster.png')
+frames[0].save(OUT/'dna-animation.gif',save_all=True,append_images=frames[1:],duration=70,loop=0,optimize=True,disposal=2)
 # A contact sheet makes the transition easy to inspect without playing a GIF.
 sheet = Image.new('RGB',(W,H*3))
 for k,i in enumerate((0,48,100)):
     sheet.paste(frames[i],(0,k*H))
 sheet.save(OUT/'preview.png')
-print(f'Rendered {len(frames)} frames; GIF: {(OUT / "dna-code.gif").stat().st_size:,} bytes')
+print(f'Rendered {len(frames)} frames; GIF: {(OUT / "dna-animation.gif").stat().st_size:,} bytes')

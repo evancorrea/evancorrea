@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/dna-code.gif" alt="A cyan and violet DNA helix unfolds into a transcription function, then reforms." width="1000" />
+  <img src="assets/dna-animation.gif" alt="A cyan and violet DNA helix unfolds into a transcription function, then reforms." width="1000" />
 </p>
 
 I build at the intersection of **AI and biology**, with a focus on **RNA regulatory biology** at Penn. I'm also exploring biosecurity, agentic systems, and how complex behavior emerges from simple rules.
