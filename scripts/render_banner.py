@@ -11,10 +11,10 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'assets'
 OUT.mkdir(exist_ok=True)
 W, H = 1000, 400
-FONT = ImageFont.truetype('/System/Library/Fonts/SFNS.ttf', 18)
+FONT = ImageFont.truetype('/System/Library/Fonts/Menlo.ttc', 16)
 SEQUENCE = 'ATGCGTACGATTCGAGCTACGGTACATGCTAGCTACGATCGTACGATGC'
 COMPLEMENT = dict(A='T', T='A', C='G', G='C')
-STEM = 'ouroboros-smooth'
+STEM = 'ouroboros-menlo-soft'
 FRAME_COUNT = 560
 FRAME_DURATION_MS = 30
 BASE_COLORS = {
@@ -65,7 +65,7 @@ for frame in range(FRAME_COUNT):
             # continuous spectrum, blended in sync with the glyph morph.
             binary_color = tuple(255*c for c in colorsys.hsv_to_rgb(
                 (t+j/len(SEQUENCE)+strand*.18) % 1, .58, 1))
-            brightness = .72+.28*(depth+1)/2
+            brightness = .70*(.72+.28*(depth+1)/2)
             color = tuple(round((a*(1-morph)+b*morph)*brightness)
                           for a,b in zip(BASE_COLORS[letter],binary_color))
             points.append((depth,round(x)-8,round(yy)-10,mask,color))
