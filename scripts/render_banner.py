@@ -13,7 +13,7 @@ W, H = 1000, 400
 FONT = ImageFont.truetype('/System/Library/Fonts/Menlo.ttc', 16)
 SEQUENCE = 'ATGCGTACGATTCGAGCTACGGTACATGCTAGCTACGATCGTACGATGC'
 COMPLEMENT = dict(A='T', T='A', C='G', G='C')
-STEM = 'terminal-ouroboros'
+STEM = 'terminal-ouroboros-slow'
 
 def smooth(x):
     x = max(0, min(1, x))
@@ -26,8 +26,9 @@ for char in 'ATCG01':
     glyphs[char] = glyph
 
 frames = []
-for frame in range(120):
-    t = frame/120
+for frame in range(240):
+    # One rotation every 16.8 seconds; two base/binary cycles per rotation.
+    t = frame/240
     im = Image.new('RGB', (W,H), 'black')
     d = ImageDraw.Draw(im)
     points = []
@@ -47,7 +48,7 @@ for frame in range(120):
             x = W/2+radius*math.cos(theta)
             yy = H/2+radius*math.sin(theta)
             delay = .10*j/(len(SEQUENCE)-1)
-            p = (t-delay) % 1
+            p = (2*t-delay) % 1
             morph = smooth((p-.18)/.09)*(1-smooth((p-.65)/.09))
             bit = str((j+strand)%2)
             mask = Image.blend(glyphs[letter],glyphs[bit],morph)
