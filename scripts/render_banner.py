@@ -13,7 +13,7 @@ W, H = 1000, 260
 FONT = ImageFont.truetype('/System/Library/Fonts/Menlo.ttc', 20)
 SEQUENCE = 'ATGCGTACGATTCGAGCTACGGTACATGCTAGCTACG'
 COMPLEMENT = dict(A='T', T='A', C='G', G='C')
-STEM = 'terminal-helix'
+STEM = 'terminal-helix-v2'
 
 def smooth(x):
     x = max(0, min(1, x))
@@ -38,8 +38,8 @@ for frame in range(120):
         z = math.cos(angle)
         pair = [(base, H/2+y, z), (COMPLEMENT[base], H/2-y, -z)]
         low, high = sorted((H/2+y,H/2-y))
-        for dot_y in range(int(low)+20, int(high)-13, 10):
-            d.point((round(x),dot_y), fill=(70,70,70))
+        for dot_y in range(int(low)+19, int(high)-15, 8):
+            d.rectangle((round(x)-1,dot_y,round(x),dot_y+3), fill=(155,155,155))
         for strand, (letter, yy, depth) in enumerate(pair):
             delay = .10*j/(len(SEQUENCE)-1)
             p = (t-delay) % 1
